@@ -2,14 +2,13 @@ import {
     TextField, Button, Typography
 } from '@material-ui/core';
 import react, { useState } from "react"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { login, logout } from '../../utils/auth';
-import "./Login.css";
 import {
     Redirect,
     useHistory,
     useLocation
-  } from "react-router-dom";
+} from "react-router-dom";
 
 
 export default function Login() {
@@ -17,9 +16,14 @@ export default function Login() {
     const [password, setPassword] = useState("Bob");
 
     const dispatch = useDispatch();
-    let history = useHistory();
-    let location = useLocation();
-    
+
+    let authState = useSelector((state) => {
+        return {
+            isAuthorized: state.isAuthorized,
+            userName: state.userName
+        }
+    });
+
     return (
         <div className="form">
             <div className="form__row">
@@ -39,7 +43,6 @@ export default function Login() {
             <div className="form__row form__row__buttons field">
                 <Button onClick={() => {
                     dispatch(login({ userName, password }))
-
                 }}
                     color="primary" variant="contained"> Вход </Button>
             </div>

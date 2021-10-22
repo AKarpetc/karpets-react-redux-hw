@@ -27,8 +27,9 @@ import { Home as HomeIcon } from '@material-ui/icons';
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import HomePage from "./components/HomePage/HomePage";
+import Error404 from "./components/Error404/Error404";
 
-
+import "./App.css"
 
 const useStyles = makeStyles((theme) => ({
   navlinks: {
@@ -65,17 +66,14 @@ export default function App() {
             </Typography>
             <div className={classes.navlinks}>
               <Link to="/about" className={classes.link}>
-                About
+                О пользователе
               </Link>
 
               <Link to="/" className={classes.link}>
                 <HomeIcon></HomeIcon>
                 Домашняя
               </Link>
-
               <Auth></Auth>
-
-
             </div>
           </Toolbar>
         </AppBar>
@@ -93,7 +91,9 @@ export default function App() {
           <PrivateRoute path="/about">
             <About />
           </PrivateRoute>
-
+          <Route path="/error404">
+            <Error404 />
+          </Route>
           <Route path="/">
             <HomePage />
           </Route>
@@ -121,7 +121,7 @@ function PrivateRoute({ children, ...rest }) {
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: "/error404",
               state: { from: location }
             }}
           />
@@ -134,12 +134,13 @@ function PrivateRoute({ children, ...rest }) {
 
 function Auth() {
   const classes = useStyles();
-  let history = useHistory();
   let dispatch = useDispatch();
+  let history = useHistory();
+
   let authState = useSelector((state) => {
     return {
       isAuthorized: state.isAuthorized,
-      userName: state.userName
+      user: state.user
     }
   })
 
@@ -148,9 +149,13 @@ function Auth() {
     return (
       <div>
         <Link to="/login" className={classes.link}>
-          {"Здравствуйте: " + authState.userName}
+          {"Здравствуйте: " + authState.user.name + " " + authState.user.surname}
         </Link>
-        <Link onClick={() => { dispatch(logout()); }} className={classes.link}>
+        <Link to="/logout" onClick={(e) => {
+          e.preventDefault();
+          dispatch(logout());
+        }}
+          className={classes.link}>
           Выйти
         </Link>
       </div>

@@ -1,26 +1,64 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+
+let users = [
+    {
+        userName: "Bob",
+        email: "bob@gmail.com",
+        name: "Bob",
+        surname: "Smit"
+    },
+    {
+        userName: "Alis",
+        email: "alis@gmail.com",
+        name: "Alis",
+        surname: "Kim"
+    },
+];
+
+let getUser = function (userName) {
+
+    var user = users.filter(x => x.userName == userName);
+    console.log(user);
+    if (user.length == 1) {
+        return user[0];
+    }
+    return null;
+}
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
         isAuthorized: false,
-        userName: "",
+        user: null,
     },
     reducers: {
         login: (state, action) => {
 
             console.log(state, action);
 
+
+            var user = getUser(action.payload.userName)
+
+            if (user == null) {
+                alert("Пользователь не найден!")
+                return;
+            }
+
+            state.user = user;
             state.isAuthorized = true;
-            state.userName = action.payload.userName;
+
         },
         logout: (state) => {
             state.isAuthorized = false;
             state.userName = "";
         },
+        register: (state, action) => {
+
+        }
     },
 });
 
-export const { login, logout } = authSlice.actions
+export const { login, logout, register } = authSlice.actions
 
 export default authSlice.reducer
