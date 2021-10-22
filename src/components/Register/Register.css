@@ -1,0 +1,33 @@
+.form {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    margin-top: 50px;
+    flex-direction: column;
+    width: 450px;
+}
+
+.form__row {
+    text-align: center;
+}
+
+.form__row__buttons {
+    justify-content: flex-end;
+    display: flex;
+}
+
+.field {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.field__desc {
+    line-height: 50px;
+    font-size: large;
+    display: block;
+    margin-right: 10px;
+}
