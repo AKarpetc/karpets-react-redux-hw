@@ -74,11 +74,11 @@ export default function App() {
           <PrivateRoute path="/about">
             <About />
           </PrivateRoute>
-          <Route path="/error404">
-            <Error404 />
-          </Route>
           <Route path="/">
             <HomePage />
+          </Route>
+          <Route path="/error404">
+            <Error404 />
           </Route>
         </Switch>
       </div>

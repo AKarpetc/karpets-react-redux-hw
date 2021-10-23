@@ -3,6 +3,8 @@ import {
 } from '@material-ui/core';
 import react, { useState } from "react"
 import { register } from '../../utils/auth';
+import addHelpDialog from '../../hoks/addHelpDialog';
+
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function Login() {
@@ -12,6 +14,13 @@ export default function Login() {
     const [surname, setSurname] = useState('');
 
     const dispatch = useDispatch();
+    var TextLabel = ({ value }) => <label className="field__desc">{value}</label>;
+
+    var LoginLabel = addHelpDialog(TextLabel, "Уникальное имя пользователя!");
+    let PasswordLabel = addHelpDialog(TextLabel, "Пароль который будет испольховаться для входа в систему!");
+    let RepidPasswordLabel = addHelpDialog(TextLabel, "Повторите пароль для исключения опечаток!");
+    let EmailLabel = addHelpDialog(TextLabel, "Email на который придет письмо с подтверждением регистрации");
+
 
     return (
         <div className="form form__register">
@@ -21,15 +30,15 @@ export default function Login() {
                 </Typography>
             </div>
             <div className="form__row field">
-                <label className="field__desc">Логин:</label>
+                <LoginLabel value="Логин" />
                 <TextField value={userName} onChange={e => setUserName(e.target.value)} className="field__value" id="login" label="Логин" variant="standard" />
             </div>
             <div className="form__row field">
-                <label className="field__desc">Пароль:</label>
+                <PasswordLabel value="Пароль" />
                 <TextField className="field__value" id="password" label="Пароль" label="Password" type="password" />
             </div>
             <div className="form__row field">
-                <label className="field__desc">Повторите пароль:</label>
+                <RepidPasswordLabel value="Павторите пароль" />
                 <TextField className="field__value" id="password" label="Пароль" label="Password" type="password" />
             </div>
 
@@ -44,7 +53,7 @@ export default function Login() {
             </div>
 
             <div className="form__row field">
-                <label className="field__desc">Электроааня почта:</label>
+                <EmailLabel value="Электронная почта:" />
                 <TextField value={email} onChange={e => setEmail(e.target.value)} className="field__value" id="login" label="Почта" variant="standard" />
             </div>
 

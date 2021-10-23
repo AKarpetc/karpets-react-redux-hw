@@ -32,3 +32,8 @@
   display: block;
   margin-right: 10px;
 }
+
+.help-wrapper
+{
+  display: flex;
+}
