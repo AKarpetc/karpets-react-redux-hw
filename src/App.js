@@ -1,5 +1,7 @@
 import React, { useContext, createContext, useState } from "react";
 import { logout } from './utils/auth';
+import { useStyles } from './utils/styles';
+
 import { useDispatch } from 'react-redux'
 import {
   BrowserRouter as Router,
@@ -28,29 +30,10 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import HomePage from "./components/HomePage/HomePage";
 import Error404 from "./components/Error404/Error404";
+import About from "./components/About";
+import AuthLinks from "./components/AuthLinks"
 
 import "./App.css"
-
-const useStyles = makeStyles((theme) => ({
-  navlinks: {
-    marginLeft: theme.spacing(10),
-    display: "flex",
-  },
-  logo: {
-    flexGrow: "1",
-    cursor: "pointer",
-  },
-  link: {
-    textDecoration: "none",
-    color: "white",
-    fontSize: "20px",
-    marginLeft: theme.spacing(20),
-    "&:hover": {
-      color: "yellow",
-      borderBottom: "1px solid white",
-    },
-  },
-}));
 
 export default function App() {
   const classes = useStyles();
@@ -73,7 +56,7 @@ export default function App() {
                 <HomeIcon></HomeIcon>
                 Домашняя
               </Link>
-              <Auth></Auth>
+              <AuthLinks></AuthLinks>
             </div>
           </Toolbar>
         </AppBar>
@@ -132,7 +115,7 @@ function PrivateRoute({ children, ...rest }) {
 }
 
 
-function Auth() {
+/*function Auth() {
   const classes = useStyles();
   let dispatch = useDispatch();
   let history = useHistory();
@@ -147,7 +130,7 @@ function Auth() {
   if (authState.isAuthorized == true) {
     history.push("/");
     return (
-      <div>
+      <React.Fragment>
         <Link to="/login" className={classes.link}>
           {"Здравствуйте: " + authState.user.name + " " + authState.user.surname}
         </Link>
@@ -158,25 +141,20 @@ function Auth() {
           className={classes.link}>
           Выйти
         </Link>
-      </div>
+      </React.Fragment>
     )
   }
 
   return (
-    <div>
+    <React.Fragment>
       <Link to="/login" className={classes.link}>
         Войти
       </Link>
       <Link to="/register" className={classes.link}>
         Зарегестрироваться
       </Link>
-    </div>
+    </React.Fragment>
   )
-
 }
 
-function About() {
-  return (<div>
-    <h2>About</h2>
-  </div>);
-}
+*/

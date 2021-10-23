@@ -2,12 +2,16 @@ import {
     TextField, Button, Typography
 } from '@material-ui/core';
 import react, { useState } from "react"
+import { register } from '../../utils/auth';
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function Login() {
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
+
+    const dispatch = useDispatch();
 
     return (
         <div className="form form__register">
@@ -31,23 +35,23 @@ export default function Login() {
 
             <div className="form__row field">
                 <label className="field__desc">Фамилия:</label>
-                <TextField value={surname} onChange={e => setSurname(e.target.value)} className="field__value" id="login" label="Логин" variant="standard" />
+                <TextField value={surname} onChange={e => setSurname(e.target.value)} className="field__value" id="login" label="Фамилия" variant="standard" />
             </div>
 
             <div className="form__row field">
                 <label className="field__desc">Имя:</label>
-                <TextField value={name} onChange={e => setName(e.target.value)} className="field__value" id="login" label="Логин" variant="standard" />
+                <TextField value={name} onChange={e => setName(e.target.value)} className="field__value" id="login" label="Имя" variant="standard" />
             </div>
 
             <div className="form__row field">
                 <label className="field__desc">Электроааня почта:</label>
-                <TextField value={email} onChange={e => setEmail(e.target.value)} className="field__value" id="login" label="Логин" variant="standard" />
+                <TextField value={email} onChange={e => setEmail(e.target.value)} className="field__value" id="login" label="Почта" variant="standard" />
             </div>
 
             <div className="form__row form__row__buttons field">
                 <Button onClick={() => {
 
-                    alert(userName);
+                    dispatch(register({ userName, surname, name, email }))
 
                 }} color="primary" variant="contained"> Зарегестрироваться </Button>
             </div>

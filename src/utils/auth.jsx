@@ -35,9 +35,6 @@ export const authSlice = createSlice({
     reducers: {
         login: (state, action) => {
 
-            console.log(state, action);
-
-
             var user = getUser(action.payload.userName)
 
             if (user == null) {
@@ -47,7 +44,6 @@ export const authSlice = createSlice({
 
             state.user = user;
             state.isAuthorized = true;
-
         },
         logout: (state) => {
             state.isAuthorized = false;
@@ -55,6 +51,17 @@ export const authSlice = createSlice({
         },
         register: (state, action) => {
 
+            var newUser = action.payload;
+
+            if (getUser(newUser.userName) != null) {
+                alert("Пользователь c таким логином уже зарегестрирован!")
+                return;
+            }
+
+            users.push(newUser);
+
+            state.user = newUser;
+            state.isAuthorized = true;
         }
     },
 });
